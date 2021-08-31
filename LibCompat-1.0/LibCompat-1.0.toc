@@ -1,0 +1,8 @@
+## Interface: 30300
+## Title: Lib: Compat-1.0
+## Notes: Brings extra useful functions, some from later expansions and others as utilties.
+## Author: Kader
+## Version: 11
+## X-Category: Library
+
+lib.xml
