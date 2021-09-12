@@ -31,7 +31,7 @@ Help you safely pack and unpack tables.
 
 Simple table helpers that do exactly what their names mean.
 
-## WeakTable
+### WeakTable
 
 If you are familiar with [LUA Weak Tables](https://www.lua.org/pil/17.html), this function helps you create weak tables on-the-go:
 
@@ -40,7 +40,7 @@ local t = MyAddOn.WeakTable() -- create a new table
 local s = MyAddOn.WeakTable(t) -- reuse the table t
 ```
 
-## newTable & delTable
+### newTable & delTable
 
 Another [LUA Weak Tables](https://www.lua.org/pil/17.html) functions that use a table pool and allow you to recycle your tables.
 
@@ -59,7 +59,7 @@ delTable(t) -- unless you return the table, once done with it recycle it.
 - *WithinRange*: returns true if a value is less/greater than or equal the min/max value.
 - *WithinRangeExclusive*: returns true if a value is less/greater than the min/max value.
 
-## Group Utilities
+### Group Utilities
 
 - *IsInRaid*: returns true if you are in a raid group.
 - *IsInGroup*: returns true if you are in a party or raid group.
@@ -92,7 +92,7 @@ local function testCallback(arg1, arg2) return end
 MyAddOn.GroupIterator(testCallback, "arg1", "arg2")
 ```
 
-## Unit Utilities
+### Unit Utilities
 
 - *GetUnitIdFromGUID*: attempts to return a unitId from the given GUID, useful if you want to run functions that require a valid unitId.
 - *GetClassFromGUID*: returns the class of the given GUID.
@@ -104,25 +104,25 @@ MyAddOn.GroupIterator(testCallback, "arg1", "arg2")
 - *UnitIsGroupLeader*: returns true if the given unit is the party or raid leader.
 - *UnitIsGroupAssistant*: returns true if the given unit has raid assist.
 
-## Class Color Utilities
+### Class Color Utilities
 
 - *GetClassColorsTable*: returns the table of class colors.
 - *GetClassColorObj*: returns the color table for the given class, as a table.
 - *GetClassColor*: returns the color table for the give class, unpacked.
 
-## C_Timer Mimic
+### C_Timer Mimic
 
 - *After*: simply executes something once after the give delay, returns nothing.
 - *NewTimer*: creates a timer that's executed only once, returns the timer object.
 - *NewTicker*: creates a repeating timer and returns its object.
 - *CancelAllTimers*: cancels all scheduled timers.
 
-## Spell Utilities
+### Spell Utilities
 
 - *GetSpellInfo*: does like the default api function, except it changes Auto Shot and Melee icons and provide extra environmental damage spells (3, 4, 5, 6, 7, 8).
 - *GetSpellLink*: same as the default api function, except that it ignores custom spells (environmental).
 
-## Specialization Utilities
+### Specialization Utilities
 
 - *GetSpecialization*: returns the spec id, spec name and talents points.
 - *GetInspectSpecialization*: returns the given unit's specialization ID.
@@ -130,7 +130,7 @@ MyAddOn.GroupIterator(testCallback, "arg1", "arg2")
 - *UnitGroupRolesAssigned*: returns the role assigned to the given unit.
 - *GetGUIDRole*: returns the role assigned to the given GUID.
 
-## C_PvP
+### C_PvP
 
 A really basic object that comes with few methods:
 
