@@ -115,7 +115,7 @@ MyAddOn.GroupIterator(testCallback, "arg1", "arg2")
 - *After*: simply executes something once after the give delay, returns nothing.
 - *NewTimer*: creates a timer that's executed only once, returns the timer object.
 - *NewTicker*: creates a repeating timer and returns its object.
-- *CancelAllTimers*: cancels all scheduled timers.
+- *CancelTimers*: cancels all scheduled timers.
 
 ### Spell Utilities
 
