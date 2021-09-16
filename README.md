@@ -127,8 +127,14 @@ MyAddOn.GroupIterator(testCallback, "arg1", "arg2")
 - *GetSpecialization*: returns the spec id, spec name and talents points.
 - *GetInspectSpecialization*: returns the given unit's specialization ID.
 - *GetSpecializationRole*: returns the given unit's specialization role.
+- *GetSpecializationInfo*: returns the given unit's specialization role.
 - *UnitGroupRolesAssigned*: returns the role assigned to the given unit.
 - *GetGUIDRole*: returns the role assigned to the given GUID.
+- *GetNumSpecializations*.
+- *GetNumSpecGroups*.
+- *GetNumUnspentTalents*.
+- *GetActiveSpecGroup*.
+- *SetActiveSpecGroup*.
 
 ### C_PvP
 
