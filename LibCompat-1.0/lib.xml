@@ -4,6 +4,6 @@
 <Script file="Libs\LibStub\LibStub.lua"/>
 <Script file="Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
 <!--@end-no-lib-strip@-->
-<Include file="Libs\LibGroupTalents-1.0.lua\lib.xml"/>
+<Include file="Libs\LibGroupTalents-1.0\lib.xml"/>
 <Script file="LibCompat-1.0.lua"/>
 </Ui>
