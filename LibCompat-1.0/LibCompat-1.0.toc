@@ -6,7 +6,7 @@
 ## X-Donate: bkader@mail.com
 
 ## Interface: 30300
-## Version: 16
+## Version: 17
 
 ## X-Category: Library
 ## X-Website: https://github.com/bkader/LibCompat-1.0
