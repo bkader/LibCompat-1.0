@@ -143,3 +143,14 @@ A really basic object that comes with few methods:
 - *C_PvP.IsPvPMap*: returns true if the player is in a battleground or an arena.
 - *C_PvP.IsBattleground*: returns true if the player is in a battleground.
 - *C_PvP.IsArena*: returns true if the player is in an arena.
+
+### Extra
+
+- *PassClickToParent*
+- *Mixin*
+- *CreateFromMixins*
+- *CreateAndInitFromMixin*
+- *CreateObjectPool*
+- *ColorMixin*
+- *CreateColor*
+- *WrapTextInColorCode*
