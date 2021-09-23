@@ -154,3 +154,14 @@ A really basic object that comes with few methods:
 - *ColorMixin*
 - *CreateColor*
 - *WrapTextInColorCode*
+- *IsPlayerSpell*
+- *GetNumClasses*
+- *GetClassInfo*
+- *FramePoolMixin*
+- *FramePool_Hide*
+- *FramePool_HideAndClearAnchors*
+- *CreateFramePool*
+- *TexturePoolMixin*
+- *TexturePool_Hide*
+- *TexturePool_HideAndClearAnchors*
+- *CreateTexturePool*
