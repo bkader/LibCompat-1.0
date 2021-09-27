@@ -134,44 +134,28 @@ do
 	end
 
 	-- Shamelessly copied from Omen - thanks!
-	local tablePool = setmetatable({}, {__mode = "kv"})
+	local tablePool = {}
+	setmetatable(tablePool, {__mode = "kv"})
 
 	-- get a new table
-	local function newTable(...)
-		local t = next(tablePool)
-		if t then
-			tablePool[t] = nil
-			for i = 1, select("#", ...) do
-				t[i] = select(i, ...)
-			end
-			return t
-		else
-			return {...}
-		end
+	local function newTable()
+		local t = next(tablePool) or {}
+		tablePool[t] = nil
+		return t
 	end
 
 	-- delete table and return to pool
-	local function delTable(t, recursive)
-		if type(t) == "table" then
-			wipe(t)
-			t[""] = true
-			t[""] = nil
-			tablePool[t] = true
-		end
-		return nil
-	end
-
-	-- delete table recursively
-	local function deepDelTable(t)
+	local function delTable(t)
 		if type(t) == "table" then
 			for k, v in pairs(t) do
 				if type(v) == "table" then
-					deepDelTable(v)
+					delTable(v)
 				end
 				t[k] = nil
 			end
-			t[""] = true
-			t[""] = nil
+			t[true] = true
+			t[true] = nil
+			setmetatable(t, nil)
 			tablePool[t] = true
 		end
 		return nil
@@ -185,7 +169,6 @@ do
 	LibCompat.WeakTable = WeakTable
 	LibCompat.newTable = newTable
 	LibCompat.delTable = delTable
-	LibCompat.deepDelTable = deepDelTable
 end
 
 -------------------------------------------------------------------------------
@@ -1414,7 +1397,6 @@ local mixins = {
 	"WeakTable",
 	"newTable",
 	"delTable",
-	"deepDelTable",
 	-- math util
 	"Round",
 	"Square",
