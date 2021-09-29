@@ -165,3 +165,4 @@ A really basic object that comes with few methods:
 - *TexturePool_Hide*
 - *TexturePool_HideAndClearAnchors*
 - *CreateTexturePool*
+- *GetPhysicalScreenSize*

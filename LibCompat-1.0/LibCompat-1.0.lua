@@ -4,7 +4,7 @@
 -- @author: Kader B (https://github.com/bkader)
 --
 
-local MAJOR, MINOR = "LibCompat-1.0", 19
+local MAJOR, MINOR = "LibCompat-1.0", 20
 local LibCompat, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 if not LibCompat then return end
 
@@ -14,6 +14,7 @@ local pairs, ipairs, select, type = pairs, ipairs, select, type
 local tinsert, tremove, tconcat, wipe = table.insert, table.remove, table.concat, wipe
 local floor, ceil, max, min = math.floor, math.ceil, math.max, math.min
 local setmetatable, format = setmetatable, string.format
+local tostring, tonumber = tostring, tonumber
 local CreateFrame = CreateFrame
 
 local GAME_LOCALE = GetLocale()
@@ -22,8 +23,6 @@ GAME_LOCALE = (GAME_LOCALE == "enGB") and "enUS" or GAME_LOCALE
 -------------------------------------------------------------------------------
 
 do
-	local tostring = tostring
-
 	local tmp = {}
 	local function Print(self, frame, ...)
 		local n = 0
@@ -1372,6 +1371,20 @@ end
 
 -------------------------------------------------------------------------------
 
+do
+	local strmatch = strmatch
+	local GetScreenResolutions = GetScreenResolutions
+	local GetCurrentResolution = GetCurrentResolution
+
+	local function GetPhysicalScreenSize()
+		local width, height = strmatch(({GetScreenResolutions()})[GetCurrentResolution()], "(%d+)x(%d+)")
+		return tonumber(width), tonumber(height)
+	end
+	LibCompat.GetPhysicalScreenSize = GetPhysicalScreenSize
+end
+
+-------------------------------------------------------------------------------
+
 local mixins = {
 	"QuickDispatch",
 	-- table util
@@ -1462,7 +1475,8 @@ local mixins = {
 	"ColorMixin",
 	"CreateColor",
 	"WrapTextInColorCode",
-	"StatusBarPrototype"
+	"StatusBarPrototype",
+	"GetPhysicalScreenSize"
 }
 
 function LibCompat:Embed(target)
