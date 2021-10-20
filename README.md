@@ -1,6 +1,6 @@
-# LibCompat-1.0
+# LibCompat-1.0 (r25)
 
-At first, I made this library as I was working on [Skada](https://github.com/bkader/Skada-WoTLK), but because I used it on few other addons as it helps me speed up the backporting process, it decided to make it a standalone library.
+At first, I made this library as I was working on [Skada](https://github.com/bkader/Skada-WoTLK), but because I used it on few other addons as it helps me speed up the backporting process, i decided to share it as a standalone library.
 
 ## What is it?
 
@@ -27,7 +27,7 @@ local r, g, b, str = GetClassColor("PALADIN")
 
 Help you safely pack and unpack tables.
 
-### tLength, tCopy, tAppendAll
+### tLength, tCopy, tAppendAll, tInvert, tIndexOf
 
 Simple table helpers that do exactly what their names mean.
 
@@ -116,11 +116,7 @@ MyAddOn.GroupIterator(testCallback, "arg1", "arg2")
 - *NewTimer*: creates a timer that's executed only once, returns the timer object.
 - *NewTicker*: creates a repeating timer and returns its object.
 - *CancelTimer*: cancels the give timer and returns nil.
-
-### Spell Utilities
-
-- *GetSpellInfo*: does like the default api function, except it changes Auto Shot and Melee icons and provide extra environmental damage spells (3, 4, 5, 6, 7, 8).
-- *GetSpellLink*: same as the default api function, except that it ignores custom spells (environmental).
+- Timers created using **NewTicker** or **NewTicker** are cancellable timers using `timer:Cancel()` function.
 
 ### Specialization Utilities
 
