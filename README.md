@@ -1,4 +1,4 @@
-# LibCompat-1.0 (r25)
+# LibCompat-1.0 (r28)
 
 At first, I made this library as I was working on [Skada](https://github.com/bkader/Skada-WoTLK), but because I used it on few other addons as it helps me speed up the backporting process, i decided to share it as a standalone library.
 
@@ -40,15 +40,27 @@ local t = MyAddOn.WeakTable() -- create a new table
 local s = MyAddOn.WeakTable(t) -- reuse the table t
 ```
 
-### newTable & delTable
+### Table & TablePool
 
-Another [LUA Weak Tables](https://www.lua.org/pil/17.html) functions that use a table pool and allow you to recycle your tables.
+the "Table" class allows you the reuse your tables instead of creating new ones. it has 2 functions `get` and `free`, using it is pretty easy:
 
 ```lua
-local newTable, delTable = MyAddOn.newTable, MyAddOn.delTable
-local t = newTable() -- that's all.
-delTable(t) -- unless you return the table, once done with it recycle it.
+local T = MyAddOn.Table
+local myTable = T.get("MyTable") -- name your table.
+-- after you finished working with your table, free it.
+T.free("MyTable")
+```
 
+As for "TablePool", it creates a table pool system allowing you to not only reuse tables but also allows the GC to claim unused ones. It returns 2 functions: the first is used to create or get a table and the second is used to free/delete it.
+
+```lua
+local new, del = MyAddOn.TablePool()
+-- to create a new table or reuse a deleted one:
+local t = new()
+-- after you're done, through it:
+del(t)
+-- note that "del" func returns "nil" just in case you want to unset the table
+t = del(t)
 ```
 
 ### Math: Round, Square, Clamp, WithinRange, WithinRangeExclusive
