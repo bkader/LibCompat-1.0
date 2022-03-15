@@ -1,4 +1,4 @@
-# LibCompat-1.0 (r28)
+# LibCompat-1.0 (r30)
 
 At first, I made this library as I was working on [Skada](https://github.com/bkader/Skada-WoTLK), but because I used it on few other addons as it helps me speed up the backporting process, i decided to share it as a standalone library.
 
@@ -136,6 +136,7 @@ MyAddOn.GroupIterator(testCallback, "arg1", "arg2")
 - *GetInspectSpecialization*: returns the given unit's specialization ID.
 - *GetSpecializationRole*: returns the given unit's specialization role.
 - *GetSpecializationInfo*: returns the given unit's specialization role.
+- *GetSpecializationInfoByID*: returns information about the given specializations ID.
 - *UnitGroupRolesAssigned*: returns the role assigned to the given unit.
 - *GetGUIDRole*: returns the role assigned to the given GUID.
 - *GetNumSpecializations*.
