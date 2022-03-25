@@ -4,7 +4,7 @@
 -- @author: Kader B (https://github.com/bkader/LibCompat-1.0)
 --
 
-local MAJOR, MINOR = "LibCompat-1.0", 30
+local MAJOR, MINOR = "LibCompat-1.0", 31
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lib then return end
 
@@ -13,7 +13,7 @@ lib.callbacks = lib.callbacks or LibStub("CallbackHandler-1.0"):New(lib)
 
 local pairs, ipairs, select, type = pairs, ipairs, select, type
 local tinsert, tremove, tconcat, wipe = table.insert, table.remove, table.concat, wipe
-local floor, ceil, max, min = math.floor, math.ceil, math.max, math.min
+local floor, ceil, max, min, abs = math.floor, math.ceil, math.max, math.min, math.abs
 local format = format or string.format
 local strlen = strlen or string.len
 local strmatch = strmatch or string.match
@@ -29,7 +29,9 @@ local QuickDispatch
 local IsInGroup, IsInRaid
 local GetUnitIdFromGUID
 local tLength
+local Round
 local WithinRange
+local BreakUpLargeNumbers
 
 local NOOP = function() end
 
@@ -363,7 +365,7 @@ do
 		return (1 - amount) * startValue + amount * endValue
 	end
 
-	local function Round(val)
+	function Round(val)
 		return (val < 0.0) and ceil(val - 0.5) or floor(val + 0.5)
 	end
 
@@ -384,7 +386,7 @@ do
 	end
 
 
-	local function BreakUpLargeNumbers(value, dobreak)
+	function BreakUpLargeNumbers(value, dobreak)
 		local retString = ""
 		if value < 1000 then
 			if (value - floor(value)) == 0 then
@@ -699,6 +701,9 @@ do
 			if not index then -- to allow other units to be checked
 				unit = GetUnitIdFromGUID(UnitGUID(unit), "group")
 				index = unit and unit:match("%d+")
+			end
+			if IsInRaid() then
+				return (index and select(2, GetRaidRosterInfo(index)) == 2)
 			end
 			return (index and GetPartyLeaderIndex() == tonumber(index))
 		end
@@ -1639,6 +1644,48 @@ do
 		return color
 	end
 
+	-- Mix this into a FontString to have it animate towards its value
+	local AnimatedNumericFontStringMixin = {}
+
+	function AnimatedNumericFontStringMixin:SetAnimatedDurationTimeSec(animatedDurationTimeSec)
+		self.animatedDurationTimeSec = animatedDurationTimeSec
+	end
+
+	function AnimatedNumericFontStringMixin:GetAnimatedDurationTimeSec()
+		return self.animatedDurationTimeSec or 1.0
+	end
+
+	function AnimatedNumericFontStringMixin:SetValue(value)
+		self.currentAnimatedValue = value
+	end
+
+	function AnimatedNumericFontStringMixin:SetAnimatedValue(value)
+		self.targetAnimatedValue = value
+		self.currentAnimatedValue = self.currentAnimatedValue or self.targetAnimatedValue
+		self.initialAnimatedValueDelta = abs(self.targetAnimatedValue - self.currentAnimatedValue)
+	end
+
+	function AnimatedNumericFontStringMixin:SnapToTarget()
+		if self.targetAnimatedValue then
+			self:SetText(BreakUpLargeNumbers(Round(self.targetAnimatedValue)))
+			self.currentAnimatedValue = self.targetAnimatedValue
+			self.targetAnimatedValue = nil
+		end
+	end
+
+	function AnimatedNumericFontStringMixin:UpdateAnimatedValue(elapsed)
+		if self.targetAnimatedValue then
+			local change = self.initialAnimatedValueDelta * (elapsed / self:GetAnimatedDurationTimeSec())
+			if abs(self.targetAnimatedValue - self.currentAnimatedValue) <= change then
+				self:SnapToTarget()
+			else
+				local direction = self.targetAnimatedValue > self.currentAnimatedValue and 1 or -1
+				self.currentAnimatedValue = self.currentAnimatedValue + direction * change
+				self:SetText(BreakUpLargeNumbers(Round(self.currentAnimatedValue)))
+			end
+		end
+	end
+
 	lib.PassClickToParent = PassClickToParent
 	lib.Mixin = Mixin
 	lib.CreateFromMixins = CreateFromMixins
@@ -1656,6 +1703,7 @@ do
 	lib.ColorMixin = ColorMixin
 	lib.CreateColor = CreateColor
 	lib.WrapTextInColorCode = WrapTextInColorCode
+	lib.AnimatedNumericFontStringMixin = AnimatedNumericFontStringMixin
 end
 
 -------------------------------------------------------------------------------
@@ -2045,6 +2093,7 @@ local mixins = {
 	"ColorMixin",
 	"CreateColor",
 	"WrapTextInColorCode",
+	"AnimatedNumericFontStringMixin",
 	"StatusBarPrototype",
 	"GetPhysicalScreenSize"
 }

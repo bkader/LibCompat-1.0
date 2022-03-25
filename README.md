@@ -1,4 +1,4 @@
-# LibCompat-1.0 (r30)
+# LibCompat-1.0 (r31)
 
 At first, I made this library as I was working on [Skada](https://github.com/bkader/Skada-WoTLK), but because I used it on few other addons as it helps me speed up the backporting process, i decided to share it as a standalone library.
 
@@ -175,3 +175,4 @@ A really basic object that comes with few methods:
 - *TexturePool_HideAndClearAnchors*
 - *CreateTexturePool*
 - *GetPhysicalScreenSize*
+- *AnimatedNumericFontStringMixin*
