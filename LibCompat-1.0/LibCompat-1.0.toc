@@ -6,8 +6,8 @@
 ## X-Donate: bkader@mail.com
 
 ## Interface: 30300
-## Version: 31
-## X-Date: 2022-03-25 @ 07:23 AM |cff808080UTC|r
+## Version: 32
+## X-Date: 2022-03-31 @ 11:55 PM |cff808080UTC|r
 
 ## X-Category: Library
 ## X-Website: https://github.com/bkader/LibCompat-1.0
