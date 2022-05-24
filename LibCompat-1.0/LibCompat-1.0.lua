@@ -1252,7 +1252,7 @@ do
 			icon = [[Interface\\Icons\\ability_hunter_beasttaming]]
 			class = "HUNTER"
 		elseif id == 254 then -- Marksmanship
-			name = LT.Marksmalship
+			name = LT.Marksmanship
 			icon = [[Interface\\Icons\\ability_hunter_focusedaim]]
 			role = "TANK"
 			class = "HUNTER"
